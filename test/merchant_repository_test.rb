@@ -10,7 +10,6 @@ class MerchantRepositoryTest < Minitest::Test
     @merchants = engine.merchants
   end
 
-
   def test_it_exists
     assert_instance_of MerchantRepository, @merchants
   end
@@ -36,10 +35,18 @@ class MerchantRepositoryTest < Minitest::Test
   end
 
   def test_can_find_by_name
-    actual1 = @merchants.find_all_by_name('keckenbauer')
-    actual2 = @merchants.find_all_by_name('IronCompassFlight')
-    assert_equal 12_334_123, actual1.first.id
-    assert_equal 12_335_596, actual2.first.id
+    fragment = 'style'
+    actual = @merchants.find_all_by_name(fragment)
+    assert_equal 3, actual.length
+    assert_equal 'justMstyle', actual.first.name
+    assert_equal 12337211, actual.last.id
+  end
+
+  def test_can_find_all_by_name
+    actual1 = @merchants.find_by_name('keckenbauer')
+    actual2 = @merchants.find_by_name('IronCompassFlight')
+    assert_equal 12_334_123, actual1.id
+    assert_equal 12_335_596, actual2.id
   end
 
   def test_can_find_last_element_id_plus_one

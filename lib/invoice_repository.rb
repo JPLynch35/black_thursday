@@ -19,8 +19,6 @@ class InvoiceRepository
     @customer_id = @repository.group_by { |invoice| invoice.customer_id }
     @merchant_id = @repository.group_by { |invoice| invoice.merchant_id }
     @status = @repository.group_by { |invoice| invoice.status }
-    @created_at = @repository.group_by { |invoice| invoice.created_at }
-    @updated_at = @repository.group_by { |invoice| invoice.updated_at }
   end
 
   def find_by_id(id)

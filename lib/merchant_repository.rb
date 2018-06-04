@@ -13,9 +13,6 @@ class MerchantRepository
 
   def build_hash_table
     @id = @repository.group_by { |merchant| merchant.id }
-    @name = @repository.group_by { |merchant| merchant.name }
-    @created_at = @repository.group_by { |merchant| merchant.created_at }
-    @updated_at = @repository.group_by { |merchant| merchant.updated_at }
   end
 
   def find_by_id(id)

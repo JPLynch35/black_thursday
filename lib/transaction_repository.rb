@@ -12,13 +12,7 @@ class TransactionRepository
   end
 
   def build_hash_table
-    @id = @repository.group_by { |transaction| transaction.id }
-    @invoice_id = @repository.group_by { |transaction| transaction.invoice_id }
-    @credit_card_number = @repository.group_by { |transaction| transaction.credit_card_number }
-    @credit_card_expiration_date = @repository.group_by { |transaction| transaction.credit_card_expiration_date }
     @result = @repository.group_by { |transaction| transaction.result }
-    @created_at = @repository.group_by { |transaction| transaction.created_at }
-    @updated_at = @repository.group_by { |transaction| transaction.updated_at }
   end
 
   def find_by_id(id)

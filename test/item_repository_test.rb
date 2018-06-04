@@ -57,6 +57,15 @@ class ItemRepositoryTest < Minitest::Test
     assert_equal 2, actual2.length
   end
 
+  def test_can_find_all_by_price_in_range
+    range1 = (1000.00..1500.00)
+    range2 = (10.00..150.00)
+    actual1 = @items.find_all_by_price_in_range(range1)
+    actual2 = @items.find_all_by_price_in_range(range2)
+    assert_equal 19, actual1.length
+    assert_equal 910, actual2.length
+  end
+
   def test_can_find_all_by_merchant_id
     actual1 = @items.find_all_by_merchant_id(12_335_963)
     actual2 = @items.find_all_by_merchant_id(12_336_081)

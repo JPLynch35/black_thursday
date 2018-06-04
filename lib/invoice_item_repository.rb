@@ -4,7 +4,8 @@ require_relative 'repository_helper'
 class InvoiceItemRepository
   include RepositoryHelper
 
-  attr_reader :quantity
+  attr_reader :quantity,
+              :invoice_id
 
   def initialize(invoice_items)
     @repository = invoice_items.map { |invoice_item| InvoiceItem.new(invoice_item) }
@@ -12,13 +13,8 @@ class InvoiceItemRepository
   end
 
   def build_hash_table
-    @id = @repository.group_by { |invoice_item| invoice_item.id }
-    @item_id = @repository.group_by { |invoice_item| invoice_item.item_id }
     @invoice_id = @repository.group_by { |invoice_item| invoice_item.invoice_id }
     @quantity = @repository.group_by { |invoice_item| invoice_item.quantity }
-    @unit_price = @repository.group_by { |invoice_item| invoice_item.unit_price }
-    @created_at = @repository.group_by { |invoice_item| invoice_item.created_at }
-    @updated_at = @repository.group_by { |invoice_item| invoice_item.updated_at }
   end
 
   def find_by_id(id)

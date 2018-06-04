@@ -13,10 +13,6 @@ class CustomerRepository
 
   def build_hash_table
     @id = @repository.group_by { |customer| customer.id }
-    @first_name = @repository.group_by { |customer| customer.first_name }
-    @last_name = @repository.group_by { |customer| customer.last_name }
-    @created_at = @repository.group_by { |customer| customer.created_at }
-    @updated_at = @repository.group_by { |customer| customer.updated_at }
   end
 
   def find_by_id(id)

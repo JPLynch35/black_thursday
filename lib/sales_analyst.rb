@@ -1,10 +1,14 @@
 require_relative 'mathematics'
 require_relative 'sales_analyst_helper'
+require_relative 'customer_analytics'
+require_relative 'customer_analytics_helper'
 require 'bigdecimal/util'
 
 class SalesAnalyst
   include Mathematics
   include SalesAnalystHelper
+  include CustomerAnalytics
+  include CustomerAnalyticsHelper
 
   def initialize(parent)
     @parent = parent
@@ -107,23 +111,5 @@ class SalesAnalyst
       invoice_items_with_invoice_id = @parent.invoice_items.find_all_by_invoice_id(invoice_id)
       invoice_item_totals(invoice_items_with_invoice_id)
     end
-  end
-
-  def top_buyers(top_customers = 20)
-    customer_ids = @parent.invoices.customer_id.keys
-    customer_invoices = @parent.invoices.customer_id.values
-    customer_totals = calculate_totals_per_customer(customer_invoices)
-    customer_ids_and_totals = Hash[customer_ids.zip(customer_totals)]
-    ids_for_top_customers = find_ids_for_top_customers(customer_ids_and_totals, top_customers)
-    find_customers_from_customer_ids(ids_for_top_customers)
-  end
-
-  def top_merchant_for_customer(customer_id)
-    invoices_for_customer = @parent.invoices.customer_id[customer_id]
-    quantity_for_invoices = calculate_quantity_for_invoices(invoices_for_customer)
-    max_items = quantity_for_invoices.compact.max
-    index_value_max_items = quantity_for_invoices.index(max_items)
-    top_merchant_id = invoices_for_customer[index_value_max_items].merchant_id
-    @parent.merchants.find_by_id(top_merchant_id)
   end
 end
