@@ -1,3 +1,6 @@
 ## Black Thursday
+#### Claire Beauvais and JP Lynch
+#### Mod1 Project5
 
-Find the [project spec here](https://github.com/turingschool/curriculum/blob/master/source/projects/black_thursday.markdown).
+Project Spec:  
+https://github.com/turingschool/curriculum/blob/master/source/projects/black_thursday.markdown
